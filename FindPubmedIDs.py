@@ -1,14 +1,4 @@
-# -*- coding: utf-8 -*-
-"""
-Created on Mon Jun  4 11:35:42 2018
-
-@author: Ernst
-"""
-
 from Bio import Entrez
-
-
-
 
 def main():
     eiwitIDs = openfile()
@@ -16,9 +6,10 @@ def main():
     search(eiwitIDs, geneIDs)
 
 
-#file met de gene ID openen    
+
+#file met de gene ID openen
 def openfile():
-    file = open("C:\\Users\\Ernst\\Documents\\GitHub\\Snakemake\\allSequence_GCcontent.txt", "r")
+    file = open("/home/enrico/Desktop/Snakemake/allSequence_GCcontent.fasta", "r")
     eiwitlist = []
 
     for line in file:
@@ -32,26 +23,29 @@ def openfile():
     return eiwitlist
 
 def opengeneids():
-    bestandID = open("C:\\Users\\Ernst\\Documents\\GitHub\\Snakemake\\GeneIDList.txt", "r")
+    bestandID = open("/home/enrico/Desktop/Snakemake/GeneIDList.txt", "r")
     geneIDs = ""
     for geneID in bestandID:
         geneIDs += geneID
     geneIDs = geneIDs.splitlines()
     return geneIDs
 
-#zoeken op pubmed met de parameters van get_info(), de gevonden pubmedID's 
-#worden terug gebracht naar de main() om later gebruikt te worden om de papers op te halen            
-def search(eiwitlist, geneIDs): 
+#zoeken op pubmed met de parameters van get_info(), de gevonden pubmedID's
+#worden terug gebracht naar de main() om later gebruikt te worden om de papers op te halen
+def search(eiwitlist, geneIDs):
     count = 0
-    outfile = open("C:\\Users\\Ernst\\Documents\\GitHub\\Snakemake\\PubmedIDs.txt","w")
-    outfile.write("GeneID\tPubmedID\n")   
+    outfile = open("/home/enrico/Desktop/Snakemake/PubmedIDs.txt","w")
+    outfile.write("GeneID\tPubmedID\n")
     Entrez.email = "A.N.Other@example.com"
     for geneid in eiwitlist:
-        handle = Entrez.esearch(db="pubmed", term=geneid, retmax=10)
-        record = Entrez.read(handle)
-        idlist = record["IdList"]
-        outfile.write(geneIDs[count]+"\t"+ str(idlist) + "\n")
-        count += 1
+        try:
+            handle = Entrez.esearch(db="pubmed", term=geneid, retmax=10)
+            record = Entrez.read(handle)
+            idlist = record["IdList"]
+            outfile.write(geneIDs[count]+"\t"+ str(idlist) + "\n")
+            count += 1
+        except ConnectionResetError:
+            pass
     print("done writing file")
     outfile.close()
 

@@ -12,10 +12,11 @@ try:
         res = str(kegg.get_pathway_by_gene(ID, "lpl")).strip('[]')
         if res != "None":
             output.write(ID + "\t" + res + "\n")
+        else:
+            output.write(ID + "\t" + "No pathway found" + "\n")
 except:
     pass
 
 
 input.close()
 output.close()
-

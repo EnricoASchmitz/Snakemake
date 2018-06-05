@@ -2,7 +2,7 @@ from Bio import Entrez
 
 def main():
     geneIDs = openfile()
-    findsequence(geneIDs[0:10])
+    findsequence(geneIDs)
 
 #file met de gene ID openen
 def openfile():
@@ -16,16 +16,20 @@ def openfile():
 
 #sequentie zoeken en wegschrijven naar een nieuw bestand
 def findsequence(geneIDs):
-    out_handle = open("/home/enrico/Desktop/Snakemake/allSequence_GCcontent.fasta", 'w')
-    Entrez.email = "A.N.Other@example.com"
-    for geneID in geneIDs:                          #zoeken op geneID
-        handle = Entrez.efetch(db="Nucleotide", id=geneID, rettype="fasta", retmode="text")
-        record = handle.read()
-                    #resultaten wegschrijven samen met de bijbehoorde GC content
-        out_handle.write("; " +geneID+ " GC content: " +calculateGCpercent(record)+"\n")
-        out_handle.write(record)
-    print("done writing file")
-    out_handle.close()
+
+        out_handle = open("/home/enrico/Desktop/Snakemake/allSequence_GCcontent.fasta", 'w')
+        Entrez.email = "A.N.Other@example.com"
+        for geneID in geneIDs:
+            try:                         #zoeken op geneID
+                handle = Entrez.efetch(db="Nucleotide", id=geneID, rettype="fasta", retmode="text")
+                record = handle.read()
+                            #resultaten wegschrijven samen met de bijbehoorde GC content
+                out_handle.write(";\t" +geneID+ "\tGC content: " +calculateGCpercent(record)+"\n")
+                out_handle.write(record)
+            except:
+                print("error with geneID: " + geneID)
+        print("done writing file")
+        out_handle.close()
 
 #GC percentage uitrekenen van de gevonden sequentie
 def calculateGCpercent(sequentie):

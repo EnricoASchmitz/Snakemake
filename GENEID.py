@@ -6,15 +6,13 @@ output = open("/home/enrico/Desktop/Snakemake/GeneIDList.txt", 'w')
 input = open("/home/enrico/Desktop/Snakemake/RNA-Seq-counts.txt", "r" ,encoding="latin-1")
 line = input.readline().strip()
 Header = input.readline().strip()
-count = 0
 Locus_tags = []
 try:
     while line:
         line = input.readline().strip()
         ID, WCFS1_glc_1, WCFS1_glc_2, WCFS1_rib_1, WCFS1_rib_2, NC8_glc_1, NC8_glc_2, NC8_rib_1, NC8_rib_2 = line.strip().split("\t")
         Locus_tags.append("lpl:"+ID)
-        count += 1
-except:
+except ValueError:
     pass
 
 http = urllib3.PoolManager()
