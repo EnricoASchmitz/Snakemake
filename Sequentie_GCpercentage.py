@@ -27,8 +27,7 @@ def findsequence(geneIDs):
                 out_handle.write(";\t" +geneID+ "\tGC content: " +calculateGCpercent(record)+"\n")
                 out_handle.write(record)
             except:
-                print("error with geneID: " + geneID)
-        print("done writing file")
+                pass
         out_handle.close()
 
 #GC percentage uitrekenen van de gevonden sequentie

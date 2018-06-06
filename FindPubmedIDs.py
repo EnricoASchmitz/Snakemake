@@ -46,7 +46,6 @@ def search(eiwitlist, geneIDs):
             count += 1
         except ConnectionResetError:
             pass
-    print("done writing file")
     outfile.close()
 
 main()
