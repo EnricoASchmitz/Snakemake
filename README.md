@@ -10,9 +10,7 @@ Dit project geeft als output een ods file. Het bestand bevat: geneid ID Name Keg
 
 Het aantal geblasten eiwitten kan veranderd worden door: if count < 1 ; te veranderen naar een ander getal dan 1. Nu wordt er 1 eiwit geblast
 
-Requirements:
 
-•	Snakemake version 3.1
 
 
 
