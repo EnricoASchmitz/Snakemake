@@ -1,4 +1,4 @@
-Snakemake Workflow
+#Snakemake Workflow
 
 input file: RNA-Seq-counts.txt
 
