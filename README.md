@@ -1,7 +1,8 @@
 Snakemake Workflow
 
 input file: RNA-Seq-counts.txt
-workflow visualisatie: dag.png 
+
+workflow visualisatie: dag.pdf
 
 LET OP: Alle bestandsnamen moeten worden veranderd in de python files en de snakemakefile
 
