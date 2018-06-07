@@ -1,4 +1,5 @@
 Snakemake Workflow
+input file: RNA-Seq-counts.txt
 
 LET OP: Alle bestandsnamen moeten worden veranderd in de python files en de snakemakefile
 
@@ -9,4 +10,6 @@ Het aantal geblasten eiwitten kan veranderd worden door: if count < 1 ; te veran
 Requirements:
 
 •	Snakemake version 3.1
+
+
 
